@@ -32,7 +32,7 @@ variable "region" {
 variable "zones" {
   type        = list(string)
   description = "The zone to host the cluster in (required if is a zonal cluster)"
-  default     = ["asia-south1-b", "asia-south1-c"]
+  default     = ["asia-south1-c"]
 }
 
 variable "network" {
