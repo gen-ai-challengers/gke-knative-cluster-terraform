@@ -65,6 +65,10 @@ variable "compute_engine_service_account" {
   description = "Service account to associate to the nodes in the cluster"
 }
 
+variable "enable_mesh_feature" {
+  description = "Enable Istio mesh features on the cluster"
+}
+
 variable "cluster_autoscaling" {
   type = object({
     enabled             = bool

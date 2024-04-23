@@ -116,6 +116,6 @@ module "asm" {
   multicluster_mode         = "connected"
   enable_cni                = true
   enable_fleet_registration = true
-  enable_mesh_feature       = true
+  enable_mesh_feature       = var.enable_mesh_feature
 
 }
