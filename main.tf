@@ -55,12 +55,25 @@ module "gcp-network" {
   }
 }
 
+module "enabled_google_apis" {
+  source  = "terraform-google-modules/project-factory/google//modules/project_services"
+  version = "~> 14.0"
+
+  project_id                  = var.project_id
+  disable_services_on_destroy = false
+
+  activate_apis = [
+    "compute.googleapis.com",
+    "container.googleapis.com",
+    "gkehub.googleapis.com",
+    "anthosconfigmanagement.googleapis.com"
+  ]
+}
 
 module "gke" {
-  source  = "terraform-google-modules/kubernetes-engine/google"
-  version = "~> 30.0"
-
-  project_id                        = var.project_id
+  source                            = "terraform-google-modules/kubernetes-engine/google"
+  version                           = "~> 30.0"
+  project_id                        = module.enabled_google_apis.project_id
   name                              = var.cluster_name
   regional                          = false
   region                            = var.region
@@ -81,8 +94,8 @@ module "gke" {
     {
       name              = "asm-node-pool"
       auto_upgrade      = true
-      min_count           = 1
-      max_count           = 3
+      min_count         = 1
+      max_count         = 3
       local_ssd_count   = 0
       disk_size_gb      = 30
       disk_type         = "pd-standard"
@@ -112,11 +125,9 @@ module "asm" {
   project_id                = var.project_id
   cluster_name              = module.gke.name
   cluster_location          = module.gke.location
-  multicluster_mode         = "connected"
   enable_cni                = true
   enable_fleet_registration = true
   enable_mesh_feature       = var.enable_mesh_feature
-  enable_vpc_sc             = true
   fleet_id                  = var.project_id
 
 }
