@@ -66,8 +66,8 @@ module "gke" {
   region                            = var.region
   zones                             = var.zones
   release_channel                   = "REGULAR"
-  network                           = var.network
-  subnetwork                        = var.subnetwork
+  network                           = module.gcp-network.network_name
+  subnetwork                        = module.gcp-network.subnets_names[0]
   ip_range_pods                     = var.ip_range_pods_name
   ip_range_services                 = var.ip_range_services_name
   network_policy                    = false
