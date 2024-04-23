@@ -85,7 +85,9 @@ module "gke" {
       node_count        = 3
       local_ssd_count   = 0
       disk_size_gb      = 30
-      machine_type      = "e2-standard-8"
+      disk_type         = "pd-standard"
+      machine_type      = "e2-standard-4"
+      
     },
     {
       name                = "gpu-pool"
@@ -94,6 +96,7 @@ module "gke" {
       max_count           = 1
       local_ssd_count     = 0
       disk_size_gb        = 30
+      disk_type           = "pd-ssd"
       accelerator_count   = 1
       accelerator_type    = "nvidia-l4"
       gpu_driver_version  = "DEFAULT"
