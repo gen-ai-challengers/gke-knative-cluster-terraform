@@ -63,7 +63,6 @@ variable "ip_range_services_name" {
 
 variable "compute_engine_service_account" {
   description = "Service account to associate to the nodes in the cluster"
-  default     = "gke-svc-account"
 }
 
 variable "cluster_autoscaling" {
