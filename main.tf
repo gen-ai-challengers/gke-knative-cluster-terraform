@@ -74,7 +74,6 @@ module "gke" {
   cluster_resource_labels           = { "mesh_id" : "proj-${data.google_project.project.number}" }
   identity_namespace                = "${var.project_id}.svc.id.goog"
   deletion_protection               = false
-  create_service_account            = false
   remove_default_node_pool          = false
   disable_legacy_metadata_endpoints = false
   cluster_autoscaling     = var.cluster_autoscaling
@@ -87,7 +86,6 @@ module "gke" {
       local_ssd_count   = 0
       disk_size_gb      = 30
       machine_type      = "e2-standard-8"
-      service_account   = var.compute_engine_service_account
     },
     {
       name                = "gpu-pool"
@@ -100,7 +98,6 @@ module "gke" {
       accelerator_type    = "nvidia-l4"
       gpu_driver_version  = "DEFAULT"
       auto_repair         = false
-      service_account     = var.compute_engine_service_account
     },
   ]
 }
