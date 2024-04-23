@@ -42,12 +42,12 @@ variable "subnetwork" {
 
 variable "ip_range_pods" {
   description = "The secondary ip range to use for pods"
-  default     = "10.0.0.0/8"
+  default     = "172.16.11.0/24"
 }
 
 variable "ip_range_services" {
   description = "The secondary ip range to use for services"
-  default     = "172.16.0.0/12"
+  default     = "172.16.10.0/24"
 }
 
 variable "ip_range_pods_name" {
