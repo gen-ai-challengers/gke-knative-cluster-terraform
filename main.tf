@@ -134,7 +134,7 @@ module "asm" {
 }
 
 resource "google_service_account" "workload_identity_gsa" {
-  account_id = "workload_identity_gsa"
+  account_id = "workload-identity-gsa"
   project    = var.project_id
 }
 
