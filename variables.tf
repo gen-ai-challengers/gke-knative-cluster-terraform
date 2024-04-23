@@ -19,6 +19,11 @@ variable "project_id" {
   default     = "genai-hackerthon"
 }
 
+variable "cluster_name" {
+  description = "Cluster name"
+  default     = "genai-gke-cluster"
+}
+
 variable "region" {
   description = "The region to host the cluster in"
   default     = "asia-south1"

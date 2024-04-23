@@ -61,7 +61,7 @@ module "gke" {
   version = "~> 30.0"
 
   project_id                        = var.project_id
-  name                              = "test-prefix-cluster-test-suffix"
+  name                              = var.cluster_name
   regional                          = false
   region                            = var.region
   zones                             = var.zones
