@@ -66,7 +66,8 @@ module "enabled_google_apis" {
     "compute.googleapis.com",
     "container.googleapis.com",
     "gkehub.googleapis.com",
-    "anthosconfigmanagement.googleapis.com"
+    "anthosconfigmanagement.googleapis.com",
+    "anthos.googleapis.com"
   ]
 }
 
@@ -131,3 +132,21 @@ module "asm" {
   fleet_id                  = var.project_id
 
 }
+
+resource "google_service_account" "workload_identity_gsa" {
+  account_id = "workload_identity_gsa"
+  project    = var.project_id
+}
+
+module "workload_identity_gsa" {
+  source  = "terraform-google-modules/kubernetes-engine/google//modules/workload-identity"
+  version = "~> 30.0"
+
+  project_id          = var.project_id
+  name                = google_service_account.workload_identity_gsa.account_id
+  use_existing_gcp_sa = true
+  # wait till workload_identity_gsa GSA is created to force module data source read during apply
+  # https://github.com/terraform-google-modules/terraform-google-kubernetes-engine/issues/1059
+  depends_on = [google_service_account.workload_identity_gsa]
+}
+
