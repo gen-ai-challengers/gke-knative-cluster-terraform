@@ -74,10 +74,9 @@ module "gke" {
   cluster_resource_labels           = { "mesh_id" : "proj-${data.google_project.project.number}" }
   identity_namespace                = "${var.project_id}.svc.id.goog"
   deletion_protection               = false
-  remove_default_node_pool          = false
+  remove_default_node_pool          = true
   disable_legacy_metadata_endpoints = false
   cluster_autoscaling               = var.cluster_autoscaling
-  remove_default_node_pool          = true
   node_pools = [
     {
       name              = "asm-node-pool"
