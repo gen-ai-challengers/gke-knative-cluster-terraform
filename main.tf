@@ -116,5 +116,7 @@ module "asm" {
   enable_cni                = true
   enable_fleet_registration = true
   enable_mesh_feature       = var.enable_mesh_feature
+  enable_vpc_sc             = true
+  fleet_id                  = var.project_id
 
 }

@@ -67,7 +67,7 @@ variable "ip_range_services_name" {
 
 variable "enable_mesh_feature" {
   description = "Enable Istio mesh features on the cluster"
-  default     = false
+  default     = true
 }
 
 variable "cluster_autoscaling" {
