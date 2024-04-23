@@ -76,17 +76,18 @@ module "gke" {
   deletion_protection               = false
   remove_default_node_pool          = false
   disable_legacy_metadata_endpoints = false
-  cluster_autoscaling     = var.cluster_autoscaling
+  cluster_autoscaling               = var.cluster_autoscaling
+  remove_default_node_pool          = true
   node_pools = [
     {
       name              = "asm-node-pool"
-      autoscaling       = false
       auto_upgrade      = true
-      node_count        = 3
+      min_count           = 1
+      max_count           = 3
       local_ssd_count   = 0
       disk_size_gb      = 30
       disk_type         = "pd-standard"
-      machine_type      = "e2-standard-4"
+      machine_type      = "e2-standard-8"
       
     },
     {
